@@ -129,8 +129,6 @@ if (isset($_GET['s'])) {
       <a href="index.php"><?php echo lang('GirisSayfasinaGit'); ?></a>
       <input class="sub" type="submit" name="sifre" value="<?php echo lang('SifreSifirla'); ?>">
 
-
-
     <?php
 
 
