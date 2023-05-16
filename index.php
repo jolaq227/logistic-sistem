@@ -156,7 +156,6 @@ if (isset($_GET['s'])) {
       <a href="?s=su"><?php echo lang('SifremiUnuttum'); ?></a>
       <input class="sub" type="submit" name="giris" value="<?php echo lang('GirisYap'); ?>">
     
-
 <?php } ?>
 
     </form>
