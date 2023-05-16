@@ -131,7 +131,6 @@ if (isset($_GET['s'])) {
 
     <?php
 
-
   } else {
     header('Location: index.php');
   }
