@@ -53,22 +53,34 @@ if (isset($_SESSION['kullanici_adi'])) {
 
       }
 
-      $satislar = getAllFrom('satislar ORDER BY id DESC');
+      if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
+      $satislar = getAllFrom("satislar ORDER BY id DESC");
+      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+        $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
+      }
 
     } elseif (isset($_POST['ara'])) {
       
         $satis = $_POST['satis-ara'];
 
-        $satislar = aramaInnerJoin($satis);
+        $satislar = aramaInnerJoin($satis, $_SESSION['ID']);
 
         
 
     } else {
-      $satislar = getAllFrom('satislar ORDER BY id DESC');
+      if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
+      $satislar = getAllFrom("satislar ORDER BY id DESC");
+      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+        $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
+      }
     }
 
   } else {
-    $satislar = getAllFrom('satislar ORDER BY id DESC');
+    if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
+      $satislar = getAllFrom("satislar ORDER BY id DESC");
+      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+        $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
+      }
   } // post end
 
   if (isset($satislar)) {

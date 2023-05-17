@@ -63,7 +63,7 @@ function getItem($from, $where, $value) {
     return $stmt->fetch();
 }
 
-function aramaInnerJoin($like) {
+function aramaInnerJoin($like, $yapan) {
     global $con;
     $stmt = $con->prepare("SELECT 
                                     urunler.urun_adi, satislar.*
@@ -78,9 +78,11 @@ function aramaInnerJoin($like) {
                             OR
                                 urun_adi LIKE ?
                             OR
-                                urunler.id LIKE ?");
+                                urunler.id LIKE ?
+                            AND
+                                satisi_yapan = ?");
 
-        $stmt->execute(array("%$like%", "%$like%", "%$like%"));
+        $stmt->execute(array("%$like%", "%$like%", "%$like%", $yapan));
         $satislar = $stmt->fetchAll();
     return $satislar;
 }
