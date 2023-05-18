@@ -6,7 +6,7 @@ if (isset($_SESSION['kullanici_adi'])) {
   include 'init.php';
 
   if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] !== 2) {
-    header("Location: kdeg.php?i='{$_SESSION['ID']}'");
+    header("Location: anasayfa.php");
     exit();
   }
 

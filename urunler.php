@@ -364,6 +364,14 @@ if (isset($_SESSION['kullanici_adi'])) {
       $urun = getItem('urunler', 'id', $uid);
       $kullanici = getItem('kullanicilar', 'id', $urun['ekleyen']);
 
+        $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
+
+        if ($kullaniciS['aktif'] === 2) {
+          $isAdmin = true;
+        } else {
+          $isAdmin = false;
+        }
+
 
         ?>
 
@@ -422,8 +430,8 @@ if (isset($_SESSION['kullanici_adi'])) {
                     <label for="u-tarihi"><?php echo lang('eklemeTarihi'); ?>:</label>
                     <input id="u-tarihi" type="text" value="<?php echo $urun['tarihi']; ?>" disabled>
 
-                    <label for="u-yapan"><?php echo lang('ekleyen'); ?>:</label>
-                    <input id="u-yapan" type="text" value="<?php echo $kullanici['kullanici_adi']; ?>" disabled>
+                    <?php 
+                    if ($isAdmin) { echo '<label for="u-yapan">'. lang('ekleyen') . ':</label><input id="u-yapan" type="text" value="' . $kullanici['kullanici_adi'] . '" disabled>'; } ?>
                 </div>
                 <!-- div 3 bitti -->
               </div>
