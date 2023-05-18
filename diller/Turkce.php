@@ -20,7 +20,7 @@ function lang($lang)
     'KullaniciAdi'              => 'Kullanıcı Adı',
     'Sifre'                     => 'Şifre',
     'SifremiUnuttum'            => 'Şifremi Unuttum',
-    'kullaniciAdiYadaSifreHata' => 'Kullanıcı Adı Yada Şifre Hatalıdır',
+    'kullaniciAdiYadaSifreHata' => 'Kullanıcı Adı Yada Şifre Hatalıdır, Pasif Kullanıcı iseniz giriş yapamazsınız!!',
     'GirisSayfasinaGit'         => 'Giriş Sayfasına Git',
     'SifreSifirla'              => 'Şifre Sıfırla',
     'Ad'                        => 'Ad',

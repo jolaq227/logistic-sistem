@@ -20,7 +20,7 @@ function lang($lang)
     'KullaniciAdi'              => 'اسم المستخدم',
     'Sifre'                     => 'كلمة السر',
     'SifremiUnuttum'            => 'نسيت كلمة السر',
-    'kullaniciAdiYadaSifreHata' => 'اسم المستخدم أو السر خطأ',
+    'kullaniciAdiYadaSifreHata' => 'اسم المستخدم أو السر خطأ، إذا كنت مستخدم غير نشط لا يسمح لك بالدخول!!',
     'GirisSayfasinaGit'         => 'الذهاب إلى صفحة تسجيل الدخول',
     'SifreSifirla'              => 'إعادة تعيين كلمة السر',
     'Ad'                        => 'الأسم',
