@@ -55,7 +55,7 @@ if (isset($_SESSION['kullanici_adi'])) {
 
       if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
       $satislar = getAllFrom("satislar ORDER BY id DESC");
-      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+      } elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 1) {
         $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
       }
 
@@ -70,7 +70,7 @@ if (isset($_SESSION['kullanici_adi'])) {
     } else {
       if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
       $satislar = getAllFrom("satislar ORDER BY id DESC");
-      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 1) {
         $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
       }
     }
@@ -78,7 +78,7 @@ if (isset($_SESSION['kullanici_adi'])) {
   } else {
     if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
       $satislar = getAllFrom("satislar ORDER BY id DESC");
-      }elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] != 2) {
+      } elseif (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 1) {
         $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
       }
   } // post end
@@ -217,29 +217,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         }
       }
 
-    } elseif ($_GET['d'] == 'sil') {
-
-      $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
-
-      $count = checkItem('satislar', 'id', $sid);
-
-      if ($count > 0) {
-
-        $satis = getItem('satislar', 'id', $sid);
-        $urun  = getItem('urunler', 'id', $satis['u_id']);
-
-        $stmt = $con->prepare("UPDATE urunler SET adet = ? WHERE id = ?");
-        $stmt->execute(array($urun['adet'] + $satis['satilan_adet'], $satis['u_id']));
-
-        bildirim($stmt->rowCount() . lang('urunGuncenlendi'));
-
-
-        bildirim(delete('satislar', 'id', $sid) . lang('satisIptalEdildi'));
-      } else {
-        header('Location: satislar.php');
-        exit();
-      }
-
     } elseif ($_GET['d'] == 'gos') {
       
       $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
@@ -332,6 +309,39 @@ if (isset($_SESSION['kullanici_adi'])) {
       exit();
     }
   } else {
+    if (isset($_GET['s'])) {
+      if ($_GET['s'] == 'sil') {
+
+        if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2 || getItem('satislar', 'id', $_GET['k'])['satisi_yapan'] == $_SESSION['ID']) {
+
+          // $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
+
+
+          $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
+
+          $count = checkItem('satislar', 'id', $sid);
+
+          if ($count > 0) {
+
+          $satis = getItem('satislar', 'id', $sid);
+          $urun  = getItem('urunler', 'id', $satis['u_id']);
+
+          $stmt = $con->prepare("UPDATE urunler SET adet = ? WHERE id = ?");
+          $stmt->execute(array($urun['adet'] + $satis['satilan_adet'], $satis['u_id']));
+
+          bildirim($stmt->rowCount() . lang('urunGuncenlendi'));
+
+
+          bildirim(delete('satislar', 'id', $sid) . lang('satisIptalEdildi'));
+          header("refresh:3;url=satislar.php");
+          } else {
+            header('Location: satislar.php');
+            exit();
+          }
+        }
+
+      }
+    }
 
 
       ?>
@@ -372,7 +382,7 @@ if (isset($_SESSION['kullanici_adi'])) {
                               <td>' .  nokta($satis['toplam_tl']) . '</td>
                               <td>' .  $satis['tarihi'] . '</td>
                               <td>
-                                <a class="a confirm" href="?d=sil&k=' . $satis['id'] .'">
+                                <a class="a confirm" href="?s=sil&k=' . $satis['id'] .'">
                                   <img class="kontrol-2" src="iconlar/trash.png" alt="">
                                 </a>
                                 <a class="a" href="?d=gos&k=' . $satis['id'] .'">

@@ -74,15 +74,15 @@ function aramaInnerJoin($like, $yapan) {
                             ON
                                 satislar.u_id = urunler.id
                             WHERE 
-                                satislar.id LIKE ?
-                            OR
-                                urun_adi LIKE ?
-                            OR
-                                urunler.id LIKE ?
-                            AND
-                                satisi_yapan = ?");
+                                satisi_yapan = ?
+                            AND (
+                                    satislar.id LIKE ?
+                                OR
+                                    urun_adi LIKE ?
+                                OR
+                                    urunler.id LIKE ?)");
 
-        $stmt->execute(array("%$like%", "%$like%", "%$like%", $yapan));
+        $stmt->execute(array($yapan, "%$like%", "%$like%", "%$like%"));
         $satislar = $stmt->fetchAll();
     return $satislar;
 }
