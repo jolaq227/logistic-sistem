@@ -26,28 +26,28 @@ if (isset($mesaj)) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['giris'])) {  
 
-    $kullanici_adi = $_POST['kul-adi'];
-    $sifre         = $_POST['sifre'];
-    $hash_sifre    = sha1($sifre);
+      $kullanici_adi = $_POST['kul-adi'];
+      $sifre         = $_POST['sifre'];
+      $hash_sifre    = sha1($sifre);
 
-    $stmt = $con->prepare("SELECT * FROM kullanicilar WHERE kullanici_adi = ? AND sifre = ? AND aktif != 0");
-    $stmt->execute(array($kullanici_adi, $hash_sifre));
-    $kullanici = $stmt->fetch();
-    $count = $stmt->rowCount();
-    if ($count > 0) {
-      $stmt = $con->prepare("INSERT INTO 
-                                    girisler(k_id, g_tarihi) 
-                                    VALUES(:k_id, now())");
-        $stmt->execute(array(
-          'k_id'       => $kullanici['id'],
-        ));
-      $_SESSION['kullanici_adi'] = $kullanici_adi;
-      $_SESSION['ID']            = $kullanici['id'];
-      header('Location: anasayfa.php');
-      exit();
-    } elseif ($count === 0) {
-      $hata = lang('kullaniciAdiYadaSifreHata');
-    }
+      $stmt = $con->prepare("SELECT * FROM kullanicilar WHERE kullanici_adi = ? AND sifre = ? AND aktif != 0");
+      $stmt->execute(array($kullanici_adi, $hash_sifre));
+      $kullanici = $stmt->fetch();
+      $count = $stmt->rowCount();
+      if ($count > 0) {
+        $stmt = $con->prepare("INSERT INTO 
+                                      girisler(k_id, g_tarihi) 
+                                      VALUES(:k_id, now())");
+          $stmt->execute(array(
+            'k_id'       => $kullanici['id'],
+          ));
+        $_SESSION['kullanici_adi'] = $kullanici_adi;
+        $_SESSION['ID']            = $kullanici['id'];
+        header('Location: anasayfa.php');
+        exit();
+      } elseif ($count === 0) {
+        $hata = lang('kullaniciAdiYadaSifreHata');
+      }
   } elseif (isset($_POST['sifre'])) {
     
     
@@ -55,9 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ad            = $_POST['ad'];
     $soyad         = $_POST['soyad'];
     $dep           = $_POST['departman'];
+    $tarihi        = $_POST['tarih'];
 
-    $stmt = $con->prepare("SELECT * FROM kullanicilar WHERE kullanici_adi = ? AND ad = ? AND soyad = ? AND departman = ? AND aktif != 0");
-    $stmt->execute(array($kullanici_adi, $ad, $soyad, $dep));
+    // SELECT girisler.g_tarihi, kullanicilar.* FROM girisler INNER JOIN kullanicilar ON girisler.k_id = kullanicilar.id WHERE kullanicilar.id = 1 ORDER BY girisler.id DESC LIMIT 1;
+    // SELECT * FROM kullanicilar WHERE kullanici_adi = ? AND ad = ? AND soyad = ? AND departman = ? AND  AND aktif != 0
+
+    $stmt = $con->prepare("SELECT girisler.*, kullanicilar.* FROM girisler INNER JOIN kullanicilar ON girisler.k_id = kullanicilar.id WHERE kullanici_adi = ? AND ad = ? AND soyad = ? AND departman = ?  AND aktif != 0 AND SUBSTRING(girisler.g_tarihi, 1, 10) = ? ORDER BY girisler.id DESC LIMIT 1");
+    $stmt->execute(array($kullanici_adi, $ad, $soyad, $dep, $tarihi));
     $kullanici = $stmt->fetch();
     $count = $stmt->rowCount();
     if ($count > 0) {
@@ -69,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ));
       $_SESSION['kullanici_adi'] = $kullanici['kullanici_adi'];
       $_SESSION['ID']            = $kullanici['id'];
-      header('Location: anasayfa.php');
+      header("Location: kdeg.php?i=" . $kullanici['id'] . "#sifre");
       exit();
     } elseif ($count === 0) {
       $hata = lang('kullaniciAdiYadaSifreHata');
@@ -122,6 +126,10 @@ if (isset($_GET['s'])) {
       <div>
         <label for="departman"><?php echo lang('Departman'); ?>:</label>
         <input id="departman" name="departman" type="text" autocomplete="off">
+      </div>
+      <div>
+        <label for="tarih"><?php echo lang('sonGirisTarihi'); ?>:</label>
+        <input id="tarih" name="tarih" type="date" autocomplete="off">
       </div>
       <div class="hata">
         <?php echo @$hata; ?>
