@@ -218,88 +218,94 @@ if (isset($_SESSION['kullanici_adi'])) {
       }
 
     } elseif ($_GET['d'] == 'gos') {
-      
-      $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
 
-      $count = checkItem('satislar', 'id', $sid);
+      if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2 || getItem('satislar', 'id', $_GET['k'])['satisi_yapan'] == $_SESSION['ID']) {
+        
+        $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
 
-      if ($count > 0) {
+        $count = checkItem('satislar', 'id', $sid);
 
-      
-      $satis = getItem('satislar', 'id', $sid);
-      $urun = getItem('urunler', 'id', $satis['u_id']);
-      $kullanici = getItem('kullanicilar', 'id', $satis['satisi_yapan']);
+        if ($count > 0) {
 
-        ?>
+        
+        $satis = getItem('satislar', 'id', $sid);
+        $urun = getItem('urunler', 'id', $satis['u_id']);
+        $kullanici = getItem('kullanicilar', 'id', $satis['satisi_yapan']);
 
-          <div class="cont-alt">
-            <div class="urun-deg-buyuk">
-              <h4><center><?php echo lang('satisBilgileri'); ?></center></h4>
-              <div class="urun-deg div-satislar">
-                <!-- div 1 basla -->
-                <div>
-                  <div class="foto">
-                    <img class="fotog" src="fotograflar/urunler/<?php echo $urun['foto']; ?>" alt="">
+          ?>
+
+            <div class="cont-alt">
+              <div class="urun-deg-buyuk">
+                <h4><center><?php echo lang('satisBilgileri'); ?></center></h4>
+                <div class="urun-deg div-satislar">
+                  <!-- div 1 basla -->
+                  <div>
+                    <div class="foto">
+                      <img class="fotog" src="fotograflar/urunler/<?php echo $urun['foto']; ?>" alt="">
+                    </div>
                   </div>
+                  <!-- div 1 Bitti -->
+                  <!-- div 2 basla -->
+                  <div class="div-2">
+                      <label for="u-no"><?php echo lang('urunNo'); ?>:</label>
+                      <input disabled id="u-no" type="text" value="<?php echo $urun['id']; ?>">
+
+                      <label for="u-adi"><?php echo lang('urunAdi'); ?>:</label>
+                      <textarea name="u-adi" id="u-adi" cols="30" rows="10" disabled><?php echo $urun['urun_adi']; ?></textarea>
+
+                      <label for="u-kat"><?php echo lang('kategori'); ?>:</label>
+                      <select name="u-kat" id="u-kat" disabled>
+                        <option value="0">...</option>
+                        <?php
+                          $katlar = getAllFrom('kategoriler');
+                          foreach ($katlar as $kat) {
+                            $select = $urun['kat'] == $kat['id'] ? 'selected' : '';
+                            echo '<option ' . $select . ' value="' . $kat['id'] . '">' . $kat['kat_adi'] . '</option>';
+                          }
+                        ?>
+                      </select>
+
+                      <label for="tedarikci"><?php echo lang('tedarikci'); ?>:</label>
+                      <input id="tedarikci" name="tedarikci" type="text" value="<?php echo $urun['tedarikci']; ?>" disabled>
+
+                      <label for="u-adresi"><?php echo lang('urunAdresi'); ?>:</label>
+                      <textarea name="u-adresi" id="u-adresi" cols="30" rows="10" disabled><?php echo $urun['urun_adresi']; ?></textarea>
+                  </div>
+                  <!-- div 2 bitti -->
+                  <!-- div 3 basla -->
+                  <div class="div-2">
+                      <label for="s-no"><?php echo lang('satisNo'); ?>:</label>
+                      <input disabled id="s-no" type="text" value="<?php echo $satis['id']; ?>">
+
+                      <label for="s-adet"><?php echo lang('satilanAdet'); ?>:</label>
+                      <input id="s-adet" type="number" value="<?php echo $satis['satilan_adet']; ?>" disabled>
+
+                      <label for="birine"><?php echo lang('birineFiyat'); ?>:</label>
+                      <input id="birine" type="number" value="<?php echo $satis['birine_fiyat']; ?>" disabled>
+
+                      <label for="toplam"><?php echo lang('toplam'); ?>:</label>
+                      <input id="toplam" type="number" value="<?php echo $satis['toplam_tl']; ?>" disabled>
+
+                      <label for="alici"><?php echo lang('alici'); ?>:</label>
+                      <input id="alici" type="text" value="<?php echo $satis['alici']; ?>" disabled>
+
+                      <label for="s-tarihi"><?php echo lang('satisTarihi'); ?>:</label>
+                      <input id="s-tarihi" type="text" value="<?php echo $satis['tarihi']; ?>" disabled>
+
+                      <label for="s-yapan"><?php echo lang('satisiYapan'); ?>:</label>
+                      <input id="s-yapan" type="text" value="<?php echo $kullanici['kullanici_adi']; ?>" disabled>
+                      
+                  </div>
+                  <!-- div 3 bitti -->
                 </div>
-                <!-- div 1 Bitti -->
-                <!-- div 2 basla -->
-                <div class="div-2">
-                    <label for="u-no"><?php echo lang('urunNo'); ?>:</label>
-                    <input disabled id="u-no" type="text" value="<?php echo $urun['id']; ?>">
-
-                    <label for="u-adi"><?php echo lang('urunAdi'); ?>:</label>
-                    <textarea name="u-adi" id="u-adi" cols="30" rows="10" disabled><?php echo $urun['urun_adi']; ?></textarea>
-
-                    <label for="u-kat"><?php echo lang('kategori'); ?>:</label>
-                    <select name="u-kat" id="u-kat" disabled>
-                      <option value="0">...</option>
-                      <?php
-                        $katlar = getAllFrom('kategoriler');
-                        foreach ($katlar as $kat) {
-                          $select = $urun['kat'] == $kat['id'] ? 'selected' : '';
-                          echo '<option ' . $select . ' value="' . $kat['id'] . '">' . $kat['kat_adi'] . '</option>';
-                        }
-                      ?>
-                    </select>
-
-                    <label for="tedarikci"><?php echo lang('tedarikci'); ?>:</label>
-                    <input id="tedarikci" name="tedarikci" type="text" value="<?php echo $urun['tedarikci']; ?>" disabled>
-
-                    <label for="u-adresi"><?php echo lang('urunAdresi'); ?>:</label>
-                    <textarea name="u-adresi" id="u-adresi" cols="30" rows="10" disabled><?php echo $urun['urun_adresi']; ?></textarea>
-                </div>
-                <!-- div 2 bitti -->
-                <!-- div 3 basla -->
-                <div class="div-2">
-                    <label for="s-no"><?php echo lang('satisNo'); ?>:</label>
-                    <input disabled id="s-no" type="text" value="<?php echo $satis['id']; ?>">
-
-                    <label for="s-adet"><?php echo lang('satilanAdet'); ?>:</label>
-                    <input id="s-adet" type="number" value="<?php echo $satis['satilan_adet']; ?>" disabled>
-
-                    <label for="birine"><?php echo lang('birineFiyat'); ?>:</label>
-                    <input id="birine" type="number" value="<?php echo $satis['birine_fiyat']; ?>" disabled>
-
-                    <label for="toplam"><?php echo lang('toplam'); ?>:</label>
-                    <input id="toplam" type="number" value="<?php echo $satis['toplam_tl']; ?>" disabled>
-
-                    <label for="alici"><?php echo lang('alici'); ?>:</label>
-                    <input id="alici" type="text" value="<?php echo $satis['alici']; ?>" disabled>
-
-                    <label for="s-tarihi"><?php echo lang('satisTarihi'); ?>:</label>
-                    <input id="s-tarihi" type="text" value="<?php echo $satis['tarihi']; ?>" disabled>
-
-                    <label for="s-yapan"><?php echo lang('satisiYapan'); ?>:</label>
-                    <input id="s-yapan" type="text" value="<?php echo $kullanici['kullanici_adi']; ?>" disabled>
-                    
-                </div>
-                <!-- div 3 bitti -->
               </div>
             </div>
-          </div>
 
-        <?php
+          <?php
+        } else {
+          header('Location: satislar.php');
+          exit();
+        }
       } else {
         header('Location: satislar.php');
         exit();
@@ -313,9 +319,6 @@ if (isset($_SESSION['kullanici_adi'])) {
       if ($_GET['s'] == 'sil') {
 
         if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2 || getItem('satislar', 'id', $_GET['k'])['satisi_yapan'] == $_SESSION['ID']) {
-
-          // $satislar = getAllFrom("satislar WHERE satisi_yapan = {$_SESSION['ID']} ORDER BY id DESC");
-
 
           $sid = isset($_GET['k']) && is_numeric($_GET['k']) ? intval($_GET['k']) : 0;
 
