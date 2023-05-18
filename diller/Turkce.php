@@ -45,7 +45,7 @@ function lang($lang)
     'depodaAdet'                => 'Ürün Adet',
     'kategori'                  => 'Kategori',
     'depoyaGirmeTarihi'         => 'Depoya Girme Tarihi',
-    'tedarikci'                 => 'tedarikçi',
+    'tedarikci'                 => 'Tedarikçi',
     'urunAdresi'                => 'Ürün Adresi',
     'adet'                      => 'Adet',
     'alimFiyati'                => 'Alım Fiyatı',
