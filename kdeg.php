@@ -105,78 +105,84 @@ if (isset($_SESSION['kullanici_adi'])) {
 
       $kid = isset($_GET['i']) && is_numeric($_GET['i']) ? intval($_GET['i']) : 0;
 
-      $count = checkItem('kullanicilar', 'id', $kid);
+      if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2 || getItem('kullanicilar', 'id', $kid)['id'] == $_SESSION['ID']) {
 
-      if ($count > 0) {
+        $count = checkItem('kullanicilar', 'id', $kid);
 
-      $kullanici = getItem('kullanicilar', 'id', $kid);
-      $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
+        if ($count > 0) {
 
-      if ($kullaniciS['aktif'] === 2) {
-        $isAdmin = true;
-      } else {
-        $isAdmin = false;
-      }
+        $kullanici = getItem('kullanicilar', 'id', $kid);
+        $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
 
-        ?>
+        if ($kullaniciS['aktif'] === 2) {
+          $isAdmin = true;
+        } else {
+          $isAdmin = false;
+        }
 
-            <div class="cont-alt">
-              <form class="urun-deg-buyuk" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-                <div class="urun-deg">
-                  <!-- div 1 basla -->
-                  <div>
-                    <div class="foto">
-                      <img class="fotog" src="fotograflar/kullanicilar/<?php echo $kullanici['foto']; ?>" alt="">
+          ?>
+
+              <div class="cont-alt">
+                <form class="urun-deg-buyuk" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+                  <div class="urun-deg">
+                    <!-- div 1 basla -->
+                    <div>
+                      <div class="foto">
+                        <img class="fotog" src="fotograflar/kullanicilar/<?php echo $kullanici['foto']; ?>" alt="">
+                      </div>
+                      <input type="file" name="foto">
                     </div>
-                    <input type="file" name="foto">
+                    <!-- div 1 Bitti -->
+                    <!-- div 2 basla -->
+                    <div class="div-2">
+                        <label for="adi"><?php echo lang('ad'); ?>:</label>
+                        <input value="<?php echo $kullanici['ad']; ?>" name="adi" id="adi" required>
+
+                        <label for="soy"><?php echo lang('soyAd'); ?>:</label>
+                        <input value="<?php echo $kullanici['soyad']; ?>" id="soy" name="soy" type="text" required>
+
+                        <label for="isi"><?php echo lang('isi'); ?>:</label>
+                        <input <?php echo $isAdmin ? '' : 'disabled'; ?> value="<?php echo $kullanici['departman']; ?>" name="<?php echo $isAdmin ? 'isi' : 'a'; ?>" id="isi" required>
+                    </div>
+                    <!-- div 2 bitti -->
+                    <!-- div 3 basla -->
+                    <div class="div-2">
+                      <label for="k-adi"><?php echo lang('kAdi'); ?>:</label>
+                        <input value="<?php echo $kullanici['kullanici_adi']; ?>" id="k-adi" name="k-adi" type="text" required>
+
+                        <label for="sifre"><?php echo lang('Sifre'); ?>:</label>
+                        <input value="<?php echo $kullanici['sifre']; ?>" id="sifre" name="sifre" type="password" required>
+
+                        <label for="sifre-2"><?php echo lang('sifreTekrar'); ?>:</label>
+                        <input value="<?php echo $kullanici['sifre']; ?>" id="sifre-2" name="sifre-2" type="password" required>
+
+                        <label for="ap"><?php echo lang('aktifPasif'); ?>:</label>
+                        <select <?php echo $isAdmin ? '' : 'disabled'; ?> name="<?php echo $isAdmin ? 'ap' : 'a'; ?>" id="ap">
+                          <option <?php echo $kullanici['aktif'] === 1 ? 'selected' : ''; ?> value="1"><?php echo lang('aktif') ?></option>
+                          <option <?php echo $kullanici['aktif'] === 0 ? 'selected' : ''; ?> value="0"><?php echo lang('pasif') ?></option>
+                          <option <?php echo $kullanici['aktif'] === 2 ? 'selected' : ''; ?> value="2"><?php echo lang('yonetici') ?></option>
+                        </select>
+
+                        <label for="id"><?php echo lang('kNo'); ?>:</label>
+                        <input value="<?php echo $kullanici['id']; ?>" id="id" name="id" disabled>
+                        <input value="<?php echo $kullanici['id']; ?>" id="id" type="hidden" name="id">
+
+                        <input value="1" id="id" type="hidden" name="<?php echo $isAdmin ? '' : 'a'; ?>">
+
+                    </div>
+                    <!-- div 3 bitti -->
                   </div>
-                  <!-- div 1 Bitti -->
-                  <!-- div 2 basla -->
-                  <div class="div-2">
-                      <label for="adi"><?php echo lang('ad'); ?>:</label>
-                      <input value="<?php echo $kullanici['ad']; ?>" name="adi" id="adi" required>
+                  <input class="urun-ekleme" name="deg" type="submit" value="<?php echo lang('degistir'); ?>">
+                </form>
+              </div>
 
-                      <label for="soy"><?php echo lang('soyAd'); ?>:</label>
-                      <input value="<?php echo $kullanici['soyad']; ?>" id="soy" name="soy" type="text" required>
-
-                      <label for="isi"><?php echo lang('isi'); ?>:</label>
-                      <input <?php echo $isAdmin ? '' : 'disabled'; ?> value="<?php echo $kullanici['departman']; ?>" name="<?php echo $isAdmin ? 'isi' : 'a'; ?>" id="isi" required>
-                  </div>
-                  <!-- div 2 bitti -->
-                  <!-- div 3 basla -->
-                  <div class="div-2">
-                    <label for="k-adi"><?php echo lang('kAdi'); ?>:</label>
-                      <input value="<?php echo $kullanici['kullanici_adi']; ?>" id="k-adi" name="k-adi" type="text" required>
-
-                      <label for="sifre"><?php echo lang('Sifre'); ?>:</label>
-                      <input value="<?php echo $kullanici['sifre']; ?>" id="sifre" name="sifre" type="password" required>
-
-                      <label for="sifre-2"><?php echo lang('sifreTekrar'); ?>:</label>
-                      <input value="<?php echo $kullanici['sifre']; ?>" id="sifre-2" name="sifre-2" type="password" required>
-
-                      <label for="ap"><?php echo lang('aktifPasif'); ?>:</label>
-                      <select <?php echo $isAdmin ? '' : 'disabled'; ?> name="<?php echo $isAdmin ? 'ap' : 'a'; ?>" id="ap">
-                        <option <?php echo $kullanici['aktif'] === 1 ? 'selected' : ''; ?> value="1"><?php echo lang('aktif') ?></option>
-                        <option <?php echo $kullanici['aktif'] === 0 ? 'selected' : ''; ?> value="0"><?php echo lang('pasif') ?></option>
-                        <option <?php echo $kullanici['aktif'] === 2 ? 'selected' : ''; ?> value="2"><?php echo lang('yonetici') ?></option>
-                      </select>
-
-                      <label for="id"><?php echo lang('kNo'); ?>:</label>
-                      <input value="<?php echo $kullanici['id']; ?>" id="id" name="id" disabled>
-                      <input value="<?php echo $kullanici['id']; ?>" id="id" type="hidden" name="id">
-
-                      <input value="1" id="id" type="hidden" name="<?php echo $isAdmin ? '' : 'a'; ?>">
-
-                  </div>
-                  <!-- div 3 bitti -->
-                </div>
-                <input class="urun-ekleme" name="deg" type="submit" value="<?php echo lang('degistir'); ?>">
-              </form>
-            </div>
-
-        <?php
+          <?php
+        } else {
+          header('Location: anasayfa.php');
+          exit();
+        }
       } else {
-        header('Location: anasayfa.php');
+        header('Location: kdeg.php?i=' . $_SESSION['ID']);
         exit();
       }
 
