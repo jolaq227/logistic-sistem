@@ -118,10 +118,12 @@ if (isset($_SESSION['kullanici_adi'])) {
                       @$tkz += $kz;
                       @$tPara += $satis['toplam_tl'];
 
-                      if ($kz <= 0) {
+                      if ($kz < 0) {
                         $gkz = '<span class="zarar">' . nokta($kz) . '</span>';
-                      } else {
+                      } elseif ($kz > 0) {
                         $gkz = '<span class="kar">+' . nokta($kz) . '</span>';
+                      } else {
+                        $gkz = '<span style="font-weight: bold; color: orange;">' . nokta($kz) . '</span>';
                       }
 
                       echo '<tr>
