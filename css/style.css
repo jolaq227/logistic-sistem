@@ -37,11 +37,9 @@ a.a {
 a.a:hover {
   color: darkblue;
 }
-
 /* Tüm Sayfalar Bitişi */
 
 /* Giriş Sayfası Başlangıcı */
-
 div.giris {
   width: 35%;
   margin-left: auto;
@@ -112,7 +110,6 @@ div.dil > a {
 /* Giriş Sayfası Bitişi */
 
 /* Sidebar Başlangıcı */
-
 div.content {
   display: grid;
   height: 100vh;
@@ -194,12 +191,9 @@ ul.sidebar-list .aktif {
   text-transform: uppercase;
   font-weight: bold;
 }
-
 /* Sidebar Bitişi */
 
-
 /* Sayfa Başı Başlaması */
-
 div.bas {
   display: grid;
   grid-template-columns: auto 1fr 50%;
@@ -304,8 +298,6 @@ div.bas div.profil div.profil-ust ul > li > img {
   height: 50px;
   object-fit: cover;
 }
-
-
 /* Sayfa Başı Bitişi */
 
 /* Bildirim Başlangıcı */
@@ -316,7 +308,6 @@ div.bildirim {
   color: white;
   font-weight: bold;
 }
-
 /* Bildirim Bitişi */
 
 
@@ -427,7 +418,6 @@ div.cont div.cont-bas-2 div:last-of-type {
   background-color: #eee;
   padding: 10px;
   border-radius: 10px;
-
 }
 
 div.cont div.cont-bas-2 form input[type=text] {
@@ -449,7 +439,6 @@ div.cont div.cont-bas-2 a.ekle {
   border: 1px solid black;
   border-radius: 5px;
 }
-
 
 table.cont-2 tr th:nth-child(1) {
   width: 15%;
@@ -487,7 +476,6 @@ img.kontrol-3 {
 /* Sayfalar Bitişi */
 
 /* Ürün Sayfası Başlangıcı */
-
 .urun-deg-buyuk {
   display: grid;
   grid-template-rows: auto auto;
@@ -557,7 +545,6 @@ a.urun-ekleme  {
   padding: 10px;
   border: 1px solid black;
   border-radius: 5px;
-  
 }
 /* Ürün Sayfası Bitişi */
 
@@ -631,11 +618,9 @@ input.hesapla {
 div.s {
   margin: 10px auto;
 }
-
 /* Satislar Sayfasi Bitisi */
 
 /* Raporlar Sayfasi Baslangici */
-
 div.kar-zarar {
   display: grid;
   grid-template-columns: auto 40%;
@@ -660,7 +645,6 @@ span.zarar {
 /* Raporlar Sayfasi Bitisi */
 
 /* Anasayfa Baslangici */
-
 div.buyuk-anasayfa {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -675,7 +659,6 @@ div.buyuk-anasayfa > div:nth-child(1), div.buyuk-anasayfa > div:nth-child(2), di
   display: grid;
   grid-template-columns: auto 1fr;
   padding: 10px;
-
 }
 
 div.buyuk-anasayfa > div:nth-child(1) {

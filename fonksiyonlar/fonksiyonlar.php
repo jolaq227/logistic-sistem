@@ -1,7 +1,6 @@
 <?php
 function getTitle() {
     global $pageTitle;
-
     if (isset($pageTitle)) {
         echo $pageTitle;
     }
@@ -90,7 +89,6 @@ function aramaInnerJoin($like, $yapan) {
 function getRapor($baslama, $bitme) {
     global $con;
 
-    // SELECT * FROM `satislar` WHERE tarihi BETWEEN '2023-05-01 22:37:13' AND '2023-05-04 00:37:13' GROUP BY DATE(tarihi) DESC
     $stmt = $con->prepare("SELECT 
                                     urunler.urun_adi, urunler.alim_fiyat, satislar.*
                             FROM 

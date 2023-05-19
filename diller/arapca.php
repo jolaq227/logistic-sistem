@@ -1,5 +1,4 @@
 <?php
-
 function lang($lang)
 {
   static $arr = array(

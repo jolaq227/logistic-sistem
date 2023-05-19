@@ -15,7 +15,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
     if (isset($_POST['ara'])) {
 
-
       if (empty($_POST['bitis']) || empty($_POST['basla'])) {
         $hizli  = $_POST['hizli'];
 
@@ -54,12 +53,8 @@ if (isset($_SESSION['kullanici_adi'])) {
       } else {
         bildirim(lang('lutfenGecerliTarihGiriniz'));
       }
-      
-        
 
         $satislar = getRapor($baslad, $bitisd);
-
-        
 
     } else {
       $satislar = getAllFrom('satislar');
@@ -72,8 +67,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
     $satislar = getRapor($baslad, $bitisd);
   } // post end
-  
-
       ?>
 
       <div class="cont">
@@ -163,10 +156,7 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
       </div>
 
-
-
       <?php
-  
 
     include 'sablonlar/footer.php';
 } else {

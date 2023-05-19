@@ -99,8 +99,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
         $urunler = arama('urunler', 'id', 'urun_adi', $urun);
 
-        
-
     } elseif (isset($_POST['deg'])) {
 
       $u_id       = $_POST['u-no'];
@@ -202,7 +200,6 @@ if (isset($_SESSION['kullanici_adi'])) {
     if ($_GET['d'] == 'ekle') {
 
       ?>
-
         <div class="cont-alt">
           <form class="urun-deg-buyuk" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
             <div class="urun-deg">
@@ -258,11 +255,7 @@ if (isset($_SESSION['kullanici_adi'])) {
           </form>
         </div>
         
-
-
-
       <?php
-
 
     } elseif ($_GET['d'] == 'sil') {
 
@@ -286,7 +279,6 @@ if (isset($_SESSION['kullanici_adi'])) {
       if ($count > 0) {
 
       $urun = getItem('urunler', 'id', $uid);
-
         ?>
 
           <div class="cont-alt">
@@ -371,8 +363,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         } else {
           $isAdmin = false;
         }
-
-
         ?>
 
           <div class="cont-alt">
@@ -450,7 +440,6 @@ if (isset($_SESSION['kullanici_adi'])) {
     }
   } else {
 
-
       ?>
 
       <div class="cont">
@@ -508,13 +497,8 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
       </div>
 
-
-
       <?php
   }
-  
-
-
 
     include 'sablonlar/footer.php';
 } else {

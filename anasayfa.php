@@ -29,7 +29,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         $isAdmin = false;
     }
 
-
     $baslad = date('Y-m-d 00:00:00', time());
     $bitisd = date('Y-m-d 23:59:59', time());
     $satislar = getRapor($baslad, $bitisd);
@@ -42,7 +41,6 @@ if (isset($_SESSION['kullanici_adi'])) {
     foreach($urunler as $urun) {
         @$uSayisi += $urun['adet'];
     }
-
 
     ?>
     <div class="anasayfa-icerik">
@@ -136,8 +134,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
     </div>
     <?php
-
-
 
     
     include 'sablonlar/footer.php';

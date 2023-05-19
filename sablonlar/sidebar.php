@@ -46,7 +46,6 @@
 					</li>
 				</a>
 				<?php
-				
 				 if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) { ?>
 				<a href="kullanicilar.php">
 					<li class="<?php if (basename($_SERVER['PHP_SELF']) == 'kullanicilar.php') { echo 'aktif'; } ?>">

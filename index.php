@@ -50,15 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
   } elseif (isset($_POST['sifre'])) {
     
-    
     $kullanici_adi = $_POST['kul-adi'];
     $ad            = $_POST['ad'];
     $soyad         = $_POST['soyad'];
     $dep           = $_POST['departman'];
     $tarihi        = $_POST['tarih'];
-
-    // SELECT girisler.g_tarihi, kullanicilar.* FROM girisler INNER JOIN kullanicilar ON girisler.k_id = kullanicilar.id WHERE kullanicilar.id = 1 ORDER BY girisler.id DESC LIMIT 1;
-    // SELECT * FROM kullanicilar WHERE kullanici_adi = ? AND ad = ? AND soyad = ? AND departman = ? AND  AND aktif != 0
 
     $stmt = $con->prepare("SELECT girisler.*, kullanicilar.* FROM girisler INNER JOIN kullanicilar ON girisler.k_id = kullanicilar.id WHERE kullanici_adi = ? AND ad = ? AND soyad = ? AND departman = ?  AND aktif != 0 AND SUBSTRING(girisler.g_tarihi, 1, 10) = ? ORDER BY girisler.id DESC LIMIT 1");
     $stmt->execute(array($kullanici_adi, $ad, $soyad, $dep, $tarihi));

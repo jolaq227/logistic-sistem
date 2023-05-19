@@ -41,12 +41,6 @@ if (isset($_SESSION['kullanici_adi'])) {
   } else {
     $kategoriler = getAllFrom('kategoriler');
   }
-
-
-
-
-
-
   
   if (isset($_GET['d'])) {
 
@@ -97,8 +91,6 @@ if (isset($_SESSION['kullanici_adi'])) {
       exit();
     }
   } else {
-
-
       ?>
 
       <div class="cont">
@@ -140,19 +132,13 @@ if (isset($_SESSION['kullanici_adi'])) {
                         </td>
                       </tr>';
               }
-
             ?>
           </table>
         </div>
       </div>
 
-
-
       <?php
   }
-  
-
-
 
     include 'sablonlar/footer.php';
 } else {

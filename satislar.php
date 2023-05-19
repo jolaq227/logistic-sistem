@@ -65,8 +65,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
         $satislar = aramaInnerJoin($satis, $_SESSION['ID']);
 
-        
-
     } else {
       if (getItem('kullanicilar', 'id', $_SESSION['ID'])['aktif'] == 2) {
       $satislar = getAllFrom("satislar ORDER BY id DESC");
@@ -91,14 +89,11 @@ if (isset($_SESSION['kullanici_adi'])) {
       $satislar[$key]['u_adi'] = $urun_name['urun_adi'];
   
     }
-  }
-    
-  
+  }  
 
   if (isset($_GET['d'])) {
 
     if ($_GET['d'] == 'sy') {
-
       ?>
 
         <div class="cont">
@@ -226,12 +221,10 @@ if (isset($_SESSION['kullanici_adi'])) {
         $count = checkItem('satislar', 'id', $sid);
 
         if ($count > 0) {
-
         
         $satis = getItem('satislar', 'id', $sid);
         $urun = getItem('urunler', 'id', $satis['u_id']);
         $kullanici = getItem('kullanicilar', 'id', $satis['satisi_yapan']);
-
           ?>
 
             <div class="cont-alt">
@@ -300,7 +293,6 @@ if (isset($_SESSION['kullanici_adi'])) {
                 </div>
               </div>
             </div>
-
           <?php
         } else {
           header('Location: satislar.php');
@@ -334,7 +326,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
           bildirim($stmt->rowCount() . lang('urunGuncenlendi'));
 
-
           bildirim(delete('satislar', 'id', $sid) . lang('satisIptalEdildi'));
           header("refresh:3;url=satislar.php");
           } else {
@@ -342,11 +333,8 @@ if (isset($_SESSION['kullanici_adi'])) {
             exit();
           }
         }
-
       }
     }
-
-
       ?>
 
       <div class="cont">
@@ -400,13 +388,8 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
       </div>
 
-
-
       <?php
   }
-  
-
-
 
     include 'sablonlar/footer.php';
 } else {

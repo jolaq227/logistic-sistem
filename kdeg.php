@@ -188,9 +188,6 @@ if (isset($_SESSION['kullanici_adi'])) {
 
   }
 
-
-
-
   include 'sablonlar/footer.php';
 } else {
   header('Location: logout.php');

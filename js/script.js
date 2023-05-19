@@ -6,20 +6,16 @@ profil.addEventListener('click', function () {
 
     if (ust.style.top === "-9vh") {
 
-        //ust.style.display = 'none';
         ust.style.top = '-500px';
         ok.style.transform = 'rotate(90deg)';
 
     } else if (ust.style.top != "-9vh") {
 
-        //ust.style.display = 'block';
         ust.style.top = '-9vh';
         ok.style.transform = 'rotate(270deg)';
 
     }
 });
-
-
 
 let onayla = document.querySelectorAll('.confirm');
 
@@ -42,5 +38,3 @@ hesapla.addEventListener('click', function () {
   toplam.value = adet.value * fiyat.value;
 
 });
-// toplam.value = adet * fiyat;
-console.log(hesapla);

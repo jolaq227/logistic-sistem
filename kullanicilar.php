@@ -62,7 +62,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         $hatalar[] = lang('buKDahaOnceKullanildi');
       }
 
-
       if (!empty($hatalar)) {
         foreach ($hatalar as $hata) {
           echo bildirim($hata);
@@ -97,8 +96,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         $k = $_POST['k-ara'];
 
         $kullanicilar = arama('kullanicilar', 'id', 'kullanici_adi', $k);
-
-        
 
     } else {
       $urunler = getAllFrom('urunler');
@@ -161,12 +158,8 @@ if (isset($_SESSION['kullanici_adi'])) {
             <input class="urun-ekleme" name="ekle" type="submit" value="<?php echo lang('Ekle'); ?>">
           </form>
         </div>
-        
-
-
 
       <?php
-
 
     } elseif ($_GET['d'] == 'sil') {
 
@@ -253,7 +246,6 @@ if (isset($_SESSION['kullanici_adi'])) {
     }
   } else {
 
-
       ?>
 
       <div class="cont">
@@ -315,13 +307,8 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
       </div>
 
-
-
       <?php
   }
-  
-
-
 
     include 'sablonlar/footer.php';
 } else {
