@@ -5,6 +5,13 @@ $pageTitle = "Ürünler";
 if (isset($_SESSION['kullanici_adi'])) {
   include 'init.php';
 
+  $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
+  if ($kullaniciS['aktif'] === 2) {
+    $isAdmin = true;
+  } else {
+    $isAdmin = false;
+  }
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['ekle'])) {
 
@@ -263,7 +270,7 @@ if (isset($_SESSION['kullanici_adi'])) {
 
       $count = checkItem('urunler', 'id', $uid);
 
-      if ($count > 0) {
+      if ($count > 0 && $isAdmin) {
         bildirim(delete('urunler', 'id', $uid) . lang('urunSilindi'));
       } else {
         header('Location: urunler.php');
@@ -356,13 +363,6 @@ if (isset($_SESSION['kullanici_adi'])) {
       $urun = getItem('urunler', 'id', $uid);
       $kullanici = getItem('kullanicilar', 'id', $urun['ekleyen']);
 
-        $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
-
-        if ($kullaniciS['aktif'] === 2) {
-          $isAdmin = true;
-        } else {
-          $isAdmin = false;
-        }
         ?>
 
           <div class="cont-alt">
@@ -478,10 +478,11 @@ if (isset($_SESSION['kullanici_adi'])) {
                               <td>' .  $adet . '</td>
                               <td>' .  $urun['kat_adi'] . '</td>
                               <td>' .  $urun['tarihi'] . '</td>
-                              <td>
-                                <a class="a confirm" href="?d=sil&k=' . $urun['id'] .'">
-                                  <img class="kontrol-2" src="iconlar/trash.png" alt="">
-                                </a>
+                              <td>';
+                              echo $isAdmin ? '<a class="a confirm" href="?d=sil&k=' . $urun['id'] .'">
+                                                  <img class="kontrol-2" src="iconlar/trash.png" alt="">
+                                                </a>' : '';
+                              echo '
                                 <a class="a" href="?d=deg&k=' . $urun['id'] .'">
                                   <img class="kontrol-2" src="iconlar/pencil.png" alt="">
                                 </a>

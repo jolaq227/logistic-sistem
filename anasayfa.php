@@ -1,7 +1,6 @@
 <?php
 session_start();
 $pageTitle = "Anasayfa";
-
 if (isset($_SESSION['kullanici_adi'])) {
     include 'init.php';
     
@@ -20,7 +19,6 @@ if (isset($_SESSION['kullanici_adi'])) {
             </div>
         <?php
     }
-
     $kullaniciS = getItem('kullanicilar', 'id', $_SESSION['ID']);
 
     if ($kullaniciS['aktif'] === 2) {
@@ -41,7 +39,6 @@ if (isset($_SESSION['kullanici_adi'])) {
     foreach($urunler as $urun) {
         @$uSayisi += $urun['adet'];
     }
-
     ?>
     <div class="anasayfa-icerik">
         <div class="buyuk-anasayfa">
@@ -134,7 +131,6 @@ if (isset($_SESSION['kullanici_adi'])) {
         </div>
     </div>
     <?php
-
     
     include 'sablonlar/footer.php';
 } else {
