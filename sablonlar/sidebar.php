@@ -74,6 +74,7 @@
 							<li><img src="iconlar/lang.png" alt="">
 								<a <?php if (isset($_COOKIE['lang'])) { if ($_COOKIE['lang'] == 'turkce') echo 'style="color: red"'; } ?> class="a" href="anasayfa.php?lang=turkce">Türkçe</a>
 								<a <?php if (isset($_COOKIE['lang'])) { if ($_COOKIE['lang'] == 'arapca') echo 'style="color: green"'; } ?> class="a" href="anasayfa.php?lang=arapca">العربية</a>
+								<a <?php if (isset($_COOKIE['lang'])) { if ($_COOKIE['lang'] == 'ingilizce') echo 'style="color: blue"'; } ?> class="a" href="anasayfa.php?lang=ingilizce">English</a>
 							</li>
 							<a class="a" href="kdeg.php?i=<?php echo $_SESSION['ID'] ?>"><li><img src="iconlar/user.png" alt=""><span><?php echo lang('Profil'); ?></span></li></a>
 							<a class="a" href="logout.php"><li><img src="iconlar/logout.png" alt=""><span><?php echo lang('CikisYap'); ?></span></li></a>

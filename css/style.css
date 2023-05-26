@@ -278,7 +278,7 @@ div.bas div.profil div.profil-ust ul li {
 
 div.bas div.profil div.profil-ust ul > li:first-of-type {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr;
 }
 
 div.bas div.profil div.profil-ust ul li span {

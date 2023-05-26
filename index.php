@@ -8,7 +8,7 @@ if (isset($_SESSION['kullanici_adi'])) {
 include 'init.php';
 
 if (isset($_GET['lang'])) {
-  if ($_GET['lang'] == 'turkce' || $_GET['lang'] == 'arapca') {
+  if ($_GET['lang'] == 'turkce' || $_GET['lang'] == 'arapca' || $_GET['lang'] == 'ingilizce') {
       setcookie("lang", $_GET['lang']);
       header("refresh:2;url=index.php");
       $mesaj = lang('2SaniyeBekleyin');
@@ -92,8 +92,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="giris">
 
   <div class="dil">
-  <a <?php if (isset($_COOKIE['lang'])) { if ($_COOKIE['lang'] == 'turkce') echo 'style="color: red"'; } ?> class="a" href="index.php?lang=turkce">Türkçe</a> - 
-								<a <?php if (isset($_COOKIE['lang'])) { if ($_COOKIE['lang'] == 'arapca') echo 'style="color: green"'; } ?> class="a" href="index.php?lang=arapca">العربية</a>
+  <a <?php if (isset($_COOKIE['lang'])) {
+              if ($_COOKIE['lang'] == 'turkce') {
+                echo 'style="color: red"';
+              }
+        } ?> class="a" href="index.php?lang=turkce">Türkçe</a>
+   - 
+	<a <?php if (isset($_COOKIE['lang'])) { 
+              if ($_COOKIE['lang'] == 'arapca') {
+                echo 'style="color: green"'; 
+              } 
+            } ?> class="a" href="index.php?lang=arapca">العربية</a>
+   - 
+	<a <?php if (isset($_COOKIE['lang'])) { 
+              if ($_COOKIE['lang'] == 'ingilizce') {
+                echo 'style="color: blue"'; 
+              } 
+            } ?> class="a" href="index.php?lang=ingilizce">English</a>
   </div>
 
 <?php

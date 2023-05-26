@@ -5,7 +5,7 @@ if (isset($_SESSION['kullanici_adi'])) {
     include 'init.php';
     
     if (isset($_GET['lang'])) {
-        if ($_GET['lang'] == 'turkce' || $_GET['lang'] == 'arapca') {
+        if ($_GET['lang'] == 'turkce' || $_GET['lang'] == 'arapca' || $_GET['lang'] == 'ingilizce') {
             setcookie("lang", $_GET['lang']);
             header("refresh:2;url=anasayfa.php");
             $mesaj = lang('2SaniyeBekleyin');
