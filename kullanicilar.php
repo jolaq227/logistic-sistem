@@ -231,6 +231,18 @@ if (isset($_SESSION['kullanici_adi'])) {
 
                   </div>
                   <!-- div 3 bitti -->
+                  <?php
+                    $stmt = $con->prepare("SELECT * FROM girisler WHERE k_id = ? ORDER BY id DESC");
+                    $stmt->execute(array($kullanici['id']));
+                    $girisler = $stmt->fetchAll();
+                    if (!empty($girisler)) {
+                      echo '<table border="1" width="200%">';
+                      foreach ($girisler as $giris) {
+                        echo '<tr><td style="padding: 10px"><center>' . $giris['g_tarihi'] . '</center></td></tr>';
+                      }
+                      echo '</table>';
+                    }
+                  ?>
                 </div>
               </div>
             </div>
