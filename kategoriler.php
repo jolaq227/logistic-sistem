@@ -103,7 +103,7 @@ if (isset($_SESSION['kullanici_adi'])) {
           </div>
           <div>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-              <input name="kat-adi-ara" type="text" placeholder="<?php echo lang('KategoriAra') ?>">
+              <input value="<?php echo @$_POST['kat-adi-ara']; ?>" name="kat-adi-ara" type="text" placeholder="<?php echo lang('KategoriAra') ?>">
               <input name="ara" type="submit" value="<?php echo lang('Ara') ?>">
             </form>
           </div>

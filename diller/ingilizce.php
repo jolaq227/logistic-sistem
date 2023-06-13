@@ -48,7 +48,7 @@ function lang($lang)
     'urunAdresi'                => 'Product Address',
     'adet'                      => 'Quantity',
     'alimFiyati'                => 'Purchase Price',
-    'satimFiyati'               => 'Satım Fiyatı',
+    'satimFiyati'               => 'Seling Price',
     'rafNo'                     => 'Shelf No',
     'sonucBulunmadi'            => 'There were no results',
     'UrunEklendi'               => ' Product Added',

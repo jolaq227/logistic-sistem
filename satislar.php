@@ -341,7 +341,7 @@ if (isset($_SESSION['kullanici_adi'])) {
         <div class="cont-bas-2">
           <div>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-              <input name="satis-ara" type="text" placeholder="<?php echo lang('satisAra') ?>">
+              <input value="<?php echo @$_POST['satis-ara']; ?>" name="satis-ara" type="text" placeholder="<?php echo lang('satisAra') ?>">
               <input name="ara" type="submit" value="<?php echo lang('Ara') ?>">
             </form>
           </div>

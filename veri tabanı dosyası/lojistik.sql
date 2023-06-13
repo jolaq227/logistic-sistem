@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 18 May 2023, 20:08:47
+-- Üretim Zamanı: 13 Haz 2023, 11:56:38
 -- Sunucu sürümü: 10.4.25-MariaDB
 -- PHP Sürümü: 8.1.10
 
@@ -111,7 +111,27 @@ INSERT INTO `girisler` (`id`, `k_id`, `g_tarihi`) VALUES
 (71, 1, '2023-05-18 16:17:56'),
 (72, 6, '2023-05-18 16:20:42'),
 (73, 1, '2023-05-18 16:25:35'),
-(74, 1, '2023-05-18 20:45:50');
+(74, 1, '2023-05-18 20:45:50'),
+(75, 1, '2023-05-19 10:12:53'),
+(76, 1, '2023-05-19 10:13:38'),
+(77, 6, '2023-05-19 10:13:50'),
+(78, 1, '2023-05-21 06:29:17'),
+(79, 1, '2023-05-21 19:07:11'),
+(80, 6, '2023-05-21 19:10:29'),
+(81, 1, '2023-05-21 19:10:41'),
+(82, 6, '2023-05-21 19:17:59'),
+(83, 1, '2023-05-21 19:19:19'),
+(84, 1, '2023-05-26 11:36:31'),
+(85, 1, '2023-06-05 11:46:09'),
+(86, 1, '2023-06-10 08:09:08'),
+(87, 1, '2023-06-10 16:23:51'),
+(88, 1, '2023-06-10 18:02:24'),
+(89, 1, '2023-06-11 07:57:34'),
+(90, 1, '2023-06-11 11:00:06'),
+(91, 6, '2023-06-11 11:02:46'),
+(92, 1, '2023-06-11 11:20:03'),
+(93, 1, '2023-06-12 12:39:26'),
+(94, 1, '2023-06-13 11:53:26');
 
 -- --------------------------------------------------------
 
@@ -142,7 +162,7 @@ INSERT INTO `kategoriler` (`id`, `kat_adi`, `ekleme_tarihi`) VALUES
 (25, 'Kazak', '2023-05-18 16:26:41'),
 (26, 'Gömlek', '2023-05-18 16:26:48'),
 (27, 'Pantolon', '2023-05-18 16:27:03'),
-(28, 'giyim', '2023-05-18 16:27:15');
+(29, 'Elektronik', '2023-06-13 11:59:27');
 
 -- --------------------------------------------------------
 
@@ -167,8 +187,9 @@ CREATE TABLE `kullanicilar` (
 
 INSERT INTO `kullanicilar` (`id`, `kullanici_adi`, `ad`, `soyad`, `departman`, `sifre`, `aktif`, `foto`) VALUES
 (1, 'admin', 'admin ad', 'admin soyad', 'Müdür', 'd033e22ae348aeb5660fc2140aec35850c4da997', 2, '470515_user.png'),
-(2, 'mhasanoglu', 'Mehmet', 'Hasanoğlu', 'Müdür Yardımcısı', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, '4072105_user.png'),
-(6, 'hasan', 'hasan', 'mehmet', 'pazarlama', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, '8973968_user.png');
+(2, 'mehmet', 'Mehmet', 'Hasanoğlu', 'Müdür Yardımcısı', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0, '4072105_user.png'),
+(6, 'hasan', 'hasan', 'mehmet', 'pazarlama', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, '8973968_user.png'),
+(7, 'ibrahim', 'İbrahim', 'Ataş', 'Satış Sorumlusu', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, '1206431_4072105_user.png');
 
 -- --------------------------------------------------------
 
@@ -202,7 +223,11 @@ INSERT INTO `satislar` (`id`, `u_id`, `satisi_yapan`, `satilan_adet`, `birine_fi
 (22, 1, 1, 40, 300, 12000, 'y', '2023-05-05 15:17:27'),
 (23, 15, 1, 200, 100, 20000, 'y', '2023-05-05 15:25:17'),
 (36, 1, 6, 5, 10, 50, 'yunus', '2023-05-18 12:57:24'),
-(37, 1, 6, 5, 55, 275, 'muhammed', '2023-05-18 12:57:34');
+(37, 1, 6, 5, 55, 275, 'muhammed', '2023-05-18 12:57:34'),
+(39, 2, 6, 3, 10, 30, 'hasan', '2023-05-19 10:23:45'),
+(40, 1, 1, 5, 15, 75, 'mehmet', '2023-05-21 06:34:52'),
+(42, 2, 1, 30, 12, 360, 'Hasan', '2023-06-13 11:54:18'),
+(44, 7, 1, 100, 23, 2300, 'İbrahim Kerimoğlu', '2023-06-13 12:35:54');
 
 -- --------------------------------------------------------
 
@@ -230,15 +255,14 @@ CREATE TABLE `urunler` (
 --
 
 INSERT INTO `urunler` (`id`, `urun_adi`, `adet`, `kat`, `ekleyen`, `alim_fiyat`, `satim_fiyat`, `tedarikci`, `urun_adresi`, `raf_no`, `foto`, `tarihi`) VALUES
-(1, 'NEON Silgi Model 58', 50, 14, 1, 10, 15, 'Ahmet', 'kahramanmaraş 46, depo 1', '5645489', '724310_silgi.jpg', '2023-05-02 18:36:32'),
-(2, 'Orient Mavi Renk Model 96 2021', 43, 12, 1, 7, 10, 'mehmet', 'kahramanmaraş 46, depo 5', '46556', '3903998_pngwing.com (2).png', '2023-05-02 20:02:22'),
-(7, 'kalem Model 112', 800, 12, 1, 12, 21, 'Hasan', 'kilis', '21', '8219763_pngwing.com (2).png', '2023-05-03 15:29:59'),
-(9, 'kalem Model 112', 1000, 12, 1, 12, 21, 'Hasan', 'kilis', '21', '6644002_pngwing.com (2).png', '2023-05-03 15:30:11'),
+(1, 'NEON Silgi Model 58', 45, 14, 1, 10, 15, 'Ahmet', 'kahramanmaraş 46, depo 1', '5645489', '724310_silgi.jpg', '2023-05-02 18:36:32'),
+(2, 'Orient Mavi Renk Model 96 2021', 10, 12, 1, 7, 10, 'mehmet', 'kahramanmaraş 46, depo 5', '46556', '3903998_pngwing.com (2).png', '2023-05-02 20:02:22'),
+(7, 'kalem Model 112', 700, 12, 1, 12, 21, 'Hasan', 'kilis', '21', '8219763_pngwing.com (2).png', '2023-05-03 15:29:59'),
 (12, 'laptop', 100, 5, 1, 5500, 6000, 'asus', 'istanbul', '1222', '402737_laptop.jpg', '2023-05-03 16:42:18'),
 (13, 'iphone 11 pro', 20, 2, 1, 15000, 17000, 'apple', 'istanbul', '56', '1945192_telefon.png', '2023-05-03 19:33:59'),
 (15, 'Etkili İnsanların 7 Alışkanlıkları ', 800, 21, 1, 20, 100, 'yunus', 'istanbul', '45', '3292709_kitap.jpg', '2023-05-04 16:31:50'),
-(16, 'silgi', 1000, 14, 1, 3, 5, 'Ahmet', 'ankara', '33', '5407169_silgi.jpg', '2023-05-05 14:30:54'),
-(18, 'klavye', 100, 1, 1, 10, 12, 'furkan', 'kahramanmaraş depo 2', '45', '5029329_klavye.jpg', '2023-05-16 14:25:47');
+(18, 'klavye', 100, 1, 1, 10, 12, 'furkan', 'kahramanmaraş depo 2', '45', '5029329_klavye.jpg', '2023-05-16 14:25:47'),
+(20, 'Asus Laptop 4GB RAM 256GB SSD Intel corei5 10. Nesil', 16, 5, 1, 5000, 6000, 'Furkan', 'İstanbul - Fatih Depo NO: 5', '896', '325325_402737_laptop.jpg', '2023-06-13 12:21:13');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -288,31 +312,31 @@ ALTER TABLE `urunler`
 -- Tablo için AUTO_INCREMENT değeri `girisler`
 --
 ALTER TABLE `girisler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kategoriler`
 --
 ALTER TABLE `kategoriler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanicilar`
 --
 ALTER TABLE `kullanicilar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `satislar`
 --
 ALTER TABLE `satislar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `urunler`
 --
 ALTER TABLE `urunler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar

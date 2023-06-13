@@ -252,7 +252,7 @@ if (isset($_SESSION['kullanici_adi'])) {
         <div class="cont-bas-2">
           <div>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-              <input name="k-ara" type="text" placeholder="<?php echo lang('kullaniciAra') ?>">
+              <input value="<?php echo @$_POST['k-ara']; ?>" name="k-ara" type="text" placeholder="<?php echo lang('kullaniciAra') ?>">
               <input name="ara" type="submit" value="<?php echo lang('Ara') ?>">
             </form>
           </div>
@@ -287,7 +287,7 @@ if (isset($_SESSION['kullanici_adi'])) {
                               <td>' .  $kullanici['kullanici_adi'] . '</td>
                               <td>' .  $kullanici['departman'] . '</td>
                               <td>' .  $ap . '</td>
-                              <td>' .  $giris['g_tarihi'] . '</td>
+                              <td>' .  @$giris['g_tarihi'] . '</td>
                               <td>
                                 <a class="a confirm" href="?d=sil&i=' . $kullanici['id'] .'">
                                   <img class="kontrol-2" src="iconlar/trash.png" alt="">
